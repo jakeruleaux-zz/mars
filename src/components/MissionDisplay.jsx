@@ -1,11 +1,12 @@
 import React from "react";
-import styles from "./../styles/SongDisplay.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { } from "./../actions";
+import { selectPhoto } from "./../actions";
 
 const MissionDisplay = ({ dispatch, date }) => {
-  const { earth_date, camera, currentPhrase, photoArray, arrayPosition, photoId } = date;
+  const { photoArray, arrayPosition, photoId } = date;
+  console.log("turd");
+  console.log(date);
   return (
     <div>
       <div>
@@ -28,3 +29,36 @@ const MissionDisplay = ({ dispatch, date }) => {
     </div>
   );
 };
+
+MissionDisplay.propTypes = {
+  date: PropTypes.object,
+  arrayPosition: PropTypes.number,
+  photoArray: PropTypes.array,
+  dispatch: PropTypes.func
+};
+
+const mapStateToProps = state => {
+  let info;
+  const date = state.photosById[state.selectedPhoto];
+  if (!state.photosById[state.selectedPhoto].isFetching) {
+    info = {
+      photoId: state.selectedPhoto,
+      date: state.photosById[state.selectedPhoto].date,
+      photoArray: state.photosById[state.selectedPhoto].photoArray,
+      arrayPosition: state.photosById[state.selectedPhoto].arrayPosition
+    };
+  } else {
+    info = {
+      date: "",
+      photoArray: "",
+      arrayPosition: ""
+    };
+  }
+  return {
+    date: info
+  };
+};
+
+
+export default connect(
+  mapStateToProps) (MissionDisplay);

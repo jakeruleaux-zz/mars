@@ -30,7 +30,7 @@ export function fetchPhotoId(date) {
       console.log(json.photos[0].img_src)
       photoForImage = json.photos[0].img_src;
       console.log(photoForImage);
-      if (json.photos.img_src > 0) {
+      if (json.photos[0] > 0) {
         let photo = json.photos[0].img_src;
         } else {
         console.log("We couldn't locate a photo under that ID!");

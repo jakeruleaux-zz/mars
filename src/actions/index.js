@@ -19,20 +19,20 @@ export const selectPhoto = (photoId) => ({
 export function fetchPhotoId(date) {
   return function (dispatch) {
     const localPhotoId = v4();
+    let photoForImage;
     dispatch(requestDate(date, localPhotoId));
-    date = date.replace(" ", "_");
+    // date = date.replace(" ", "_");
     return fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=" + date + "&api_key=zICJa2foFUvdGR6lf93MIywcuMDCN3cwNXeYZ8Xd").then(
       response => response.json(),
       error => console.log("An error occured.", error)
     ).then(function(json) {
       console.log("hello");
-      console.log(json.photos.img_src)
+      console.log(json.photos[0].img_src)
+      photoForImage = json.photos[0].img_src;
+      console.log(photoForImage);
       if (json.photos.img_src > 0) {
-        const nasaMarsId = json.message.body.photo_list[0].photo.photo_id;
-        const earth_date = json.message.body.photo_list[0].photo.photo_date
-        const camera = json.message.body.photo_list[0].photo.photo_name;
-        fetchPhotoId(date, camera, nasaMarsId, localPhotoId, dispatch);
-      } else {
+        let photo = json.photos[0].img_src;
+        } else {
         console.log("We couldn't locate a photo under that ID!");
       }
     });

@@ -16,7 +16,8 @@ class PhotoSearch extends React.Component {
       return;
     }
     this.props.dispatch(fetchPhotoId(_date.value.trim()));
-    _date.value = "";
+    console.log(_date.value);
+    // _date.value = "";
   }
 
   render(){

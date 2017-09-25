@@ -27,7 +27,7 @@ export function fetchPhotoId(date) {
     ).then(function(json) {
       console.log("hello");
       console.log(json.photos.img_src)
-      if (json.photos.img_src.photo.length > 0) {
+      if (json.photos.img_src > 0) {
         const nasaMarsId = json.message.body.photo_list[0].photo.photo_id;
         const earth_date = json.message.body.photo_list[0].photo.photo_date
         const camera = json.message.body.photo_list[0].photo.photo_name;
